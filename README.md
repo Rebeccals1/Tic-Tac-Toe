@@ -22,8 +22,15 @@ java tictactoe.Main
 ## How to Play
 
 - Run the commands above.
-- Each turn you’ll see the current board and a list of Open cells like [1, 2, 4, 7].
-- Type a number from that list and press Enter.
+- Each turn you’ll see the current board and a list of Open cells like [1, 2, 4, 7]
+- Enter the number (1–9) of the cell where you want to place your mark
+```
+1 | 2 | 3
+---------
+4 | 5 | 6
+---------
+7 | 8 | 9
+```
 - The computer replies; repeat until someone wins or it’s a draw.
 
 
@@ -42,20 +49,9 @@ src/
 ```
 
 ## Design Snapshot (beginner-friendly)
-- **Encapsulation:** The board’s 3×3 grid lives in a private array inside Board. Only placeMove(position, mark) can change it.
-- **Board placeMove method checks:**
-  - Is position 1–9?
-  - Is the target cell empty?
-  - Is the mark X or O (not EMPTY)?
-  - Thanks to these checks, the board always stays valid.
-
-- **Read-only helpers:** You can look at marks with getCell() and see legal moves with legalMoves() (safe list).
-- **Players (inheritance + polymorphism):** Player is the generic type with mark() and nextMove(Board).
-  - HumanPlayer asks you for input.
-  - ComputerPlayer uses a small strategy.
-  - The Game loop treats both the same—just calls nextMove()—no special cases.
-
-- **Trade-off:** We picked a simple Player hierarchy (easy to understand) instead of a pluggable “strategy” object. If we add many AI types later, we can switch to strategies without changing the board.
+- **Encapsulation:** The board’s 3×3 grid is private inside Board. Moves are only applied through placeMove(), which checks for valid range, emptiness, and correct mark.
+- **Inheritance/Polymorphism:** Player is abstract and defines the shared API (nextMove(Board), mark()). HumanPlayer and ComputerPlayer implement it differently, but Game treats them the same.
+- **Trade-off:** Inheritance makes the design simple for now. If more AI types are added later, the design could switch to strategies (composition) for more flexibility.
 
 
 ## UML / Diagram (ASCII)
