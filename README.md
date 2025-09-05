@@ -59,40 +59,76 @@ src/
 
 
 ## UML / Diagram (ASCII)
-```
-
- ┌─────────────┐
- │    Game     │ → runs the loop, prints board
- └─────┬───────┘
-       │ uses
-       ▼
- ┌─────────────┐
- │   Board     │ → private 3×3 grid; placeMove, legalMoves
- └─────┬───────┘
-       │ checked by
-       ▼
- ┌─────────────┐
- │ GameResolver│ → X wins, O wins, draw, or in progress
- └─────────────┘
-
- ┌─────────────┐
- │   Player    │ (abstract)
- └─────┬───────┘
-   ┌───┴───────────┐
-   │               │
-┌───────┐     ┌───────────────┐
-│ Human │     │   Computer    │
-│ asks  │     │ win/block/... │
-└───────┘     └───────────────┘
 
 ```
++-----------------------------------+
+| «enum» Mark                       |
+|-----------------------------------|
+| X | O | EMPTY                     |
++-----------------------------------+
 
++-----------------------------------+
+| Board                             |
+|-----------------------------------|
+| - cells : Mark[9]                 |
+|-----------------------------------|
+| + Board()                         |
+| + Board(other: Board)             |
+| + placeMove(pos:int, mark:Mark)   |
+| + getCell(pos:int): Mark          |
+| + isFull(): boolean               |
+| + legalMoves(): List<int>         |
+| + snapshot(): Mark[]              |
+| + toString(): String              |
++-----------------------------------+
+               ^
+               | uses
+               |
++-----------------------------------+
+| «abstract» Player                 |
+|-----------------------------------|
+| - mark : Mark                     |
+|-----------------------------------|
+| + Player(mark:Mark)               |
+| + mark(): Mark                    |
+| # nextMove(board:Board): int      |
++-----------------+-----------------+
+                  | inherits
+     +------------+------------+
+     |                         |
++---------------------+  +----------------------+
+| HumanPlayer         |  | ComputerPlayer       |
+|---------------------|  |----------------------|
+| + nextMove(...):int |  | + nextMove(...): int |
++---------------------+  +----------------------+
 
-## Future Ideas
++-----------------------------------+
+| GameResolver                      |
+|-----------------------------------|
+| enum GameState:                   |
+|  X_WINS, O_WINS, DRAW, IN_PROGRESS|
+|-----------------------------------|
+| + resolve(board:Board): GameState |
+| + isWinningMove(b:Board,          |
+|   pos:int, who:Mark): boolean     |
++-----------------------------------+
 
-- Multiple AI strategies (minimax, heuristics)
-- Two-human mode
-- GUI (Swing/JavaFX)
++-----------------------------------+
+| Game                              |
+|-----------------------------------|
+| - board : Board                   |
+| - pX : Player                     |
+| - pO : Player                     |
+|-----------------------------------|
+| + Game(x:Player, o:Player)        |
+| + play(): void                    |
+| - printBoard(): void              |
++-----------------------------------+
+| uses Board, has Players,          |
+| checks state via GameResolver     |
++-----------------------------------+
+
+```
 
 ## License
 MIT — Enjoy, use, and share.
