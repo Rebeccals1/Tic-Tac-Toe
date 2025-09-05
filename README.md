@@ -1,10 +1,10 @@
-# 🎮 Tic-Tac-Toe  
+# Tic-Tac-Toe  
 
 A simple **console-based Tic-Tac-Toe game** written in **Java**. Play against a friend or let the computer make moves for you! This project demonstrates clean object-oriented design with classes for the game board, resolver logic, and main gameplay loop.  
 
 ---
 
-## ✨ Features  
+## Features  
 - Two-player Tic-Tac-Toe (Player vs Computer supported).  
 - Winner detection across rows, columns, and diagonals.  
 - Automatic draw detection when the board is full.  
@@ -13,7 +13,7 @@ A simple **console-based Tic-Tac-Toe game** written in **Java**. Play against a 
 
 
 
-## 📂 Project Structure 
+## Project Structure 
 ```
 
 src/
