@@ -1,4 +1,4 @@
-# Tic-Tac-Toe  
+# Tic-Tac-Toe  - by Rebecca
 
 A simple **console-based Tic-Tac-Toe game** written in **Java**. Play against a friend or let the computer make moves for you! This project demonstrates clean object-oriented design with classes for the game board, resolver logic, and main gameplay loop.  
 
