@@ -24,7 +24,7 @@ src/
 
 ```
 
-## 🚀 Getting Started  
+## Getting Started  
 
 ### Prerequisites  
 - Java 8 or later installed on your machine.  
