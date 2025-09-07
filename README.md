@@ -14,9 +14,17 @@ Human vs Computer with a readable board, safe move validation, and a simple AI (
 
 ## Quick Run
 ```
+# 1) Clone
+git clone https://github.com/Rebeccals1/Tic-Tac-Toe.git
+cd Tic-Tac-Toe
+
+# 2) Compile (from the src folder, since classes are in package tictactoe)
 cd src
 javac tictactoe/*.java
+
+# 3) Run
 java tictactoe.Main
+
 ```
 
 ## How to Play
