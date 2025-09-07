@@ -60,13 +60,14 @@ public class Board {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int r = 0; r < 3; r++) {
-            int base = r * 3;
+            int i = r * 3;
             sb.append(" ")
-                    .append(cells[base].toString()).append(" │ ")
-                    .append(cells[base + 1].toString()).append(" │ ")
-                    .append(cells[base + 2].toString()).append("\n");
-            if (r < 2) sb.append("───┼───┼───\n");
+                    .append(getCell(i + 1)).append(" | ")
+                    .append(getCell(i + 2)).append(" | ")
+                    .append(getCell(i + 3)).append("\n");
+            if (r < 2) sb.append("---+---+---\n");
         }
         return sb.toString();
     }
+
 }

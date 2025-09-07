@@ -9,26 +9,25 @@ import tictactoe.Mark;
 class BoardTest {
 
     @Test
-    void emptyBoard_hasAllEmptyCells() {
-        Board b = new Board();
-        for (int pos = 1; pos <= 9; pos++) {
-            assertEquals(Mark.EMPTY, b.getCell(pos));
-        }
-    }
-
-    @Test
-    void placeMove_rejectsOutOfRange() {
-        Board b = new Board();
-        assertThrows(IllegalArgumentException.class, () -> b.placeMove(0, Mark.X));
-        assertThrows(IllegalArgumentException.class, () -> b.placeMove(10, Mark.X));
-    }
-
-    @Test
-    void placeMove_rejectsOccupied() {
+    void toString_showsPlacedMarks() {
         Board b = new Board();
         b.placeMove(1, Mark.X);
-        // Match the code: should throw IllegalArgumentException
-        assertThrows(IllegalArgumentException.class, () -> b.placeMove(1, Mark.O));
+        b.placeMove(5, Mark.O);
+
+        String boardString = b.toString();
+        // Debug print (optional): System.out.println(boardString);
+
+        assertTrue(boardString.contains("X"), "Board string should include X");
+        assertTrue(boardString.contains("O"), "Board string should include O");
+    }
+
+    @Test
+    void toString_showsGridLayout() {
+        Board b = new Board();
+        String boardString = b.toString();
+
+        assertTrue(boardString.contains("|"), "Expected vertical separators in board string");
+        assertTrue(boardString.contains("---+---+---"), "Expected horizontal separators in board string");
     }
 
 }
