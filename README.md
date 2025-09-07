@@ -66,66 +66,65 @@ src/
 | X | O | EMPTY                     |
 +-----------------------------------+
 
-+-----------------------------------+
-| Board                             |
-|-----------------------------------|
-| - cells : Mark[9]                 |
-|-----------------------------------|
-| + Board()                         |
-| + Board(other: Board)             |
-| + placeMove(pos:int, mark:Mark)   |
-| + getCell(pos:int): Mark          |
-| + isFull(): boolean               |
-| + legalMoves(): List<int>         |
-| + snapshot(): Mark[]              |
-| + toString(): String              |
-+-----------------------------------+
-               ^
-               | uses
-               |
++-------------------------------------+
+| Board                               |
+|-------------------------------------|
+| - cells : Mark[9]                   |
+|-------------------------------------|
+| + Board()                           |
+| + Board(other: Board)               |
+| + placeMove(pos:int, mark:Mark):void|
+| + getCell(pos:int): Mark            |
+| + isFull(): boolean                 |
+| + legalMoves(): List<Integer>       |
+| + snapshot(): Mark[]                |
+| + toString(): String                |
++-------------------------------------+
+         (stores 9 Marks)
+
 +-----------------------------------+
 | «abstract» Player                 |
 |-----------------------------------|
 | - mark : Mark                     |
 |-----------------------------------|
 | + Player(mark:Mark)               |
-| + mark(): Mark                    |
-| # nextMove(board:Board): int      |
-+-----------------+-----------------+
-                  | inherits
-     +------------+------------+
-     |                         |
-+---------------------+  +----------------------+
-| HumanPlayer         |  | ComputerPlayer       |
-|---------------------|  |----------------------|
-| + nextMove(...):int |  | + nextMove(...): int |
-+---------------------+  +----------------------+
+| + getMark(): Mark                 |
+| {abstract} + nextMove(b:Board):int|
++-----------------^-----------------+
+                  |
+        +---------+---------+
+        |                   |
++--------------------+  +--------------------+
+| HumanPlayer        |  | ComputerPlayer     |
+|--------------------|  |--------------------|
+| + nextMove(...):int|  | + nextMove(...):int|
++--------------------+  +--------------------+
+
++--------------------------------------+
+| «enum» GameState                     |
+|--------------------------------------|
+| IN_PROGRESS | DRAW | X_WINS | O_WINS |
++--------------------------------------+
 
 +-----------------------------------+
 | GameResolver                      |
 |-----------------------------------|
-| enum GameState:                   |
-|  X_WINS, O_WINS, DRAW, IN_PROGRESS|
-|-----------------------------------|
 | + resolve(board:Board): GameState |
-| + isWinningMove(b:Board,          |
-|   pos:int, who:Mark): boolean     |
 +-----------------------------------+
 
 +-----------------------------------+
 | Game                              |
 |-----------------------------------|
 | - board : Board                   |
-| - pX : Player                     |
-| - pO : Player                     |
+| - x : Player                      |
+| - o : Player                      |
 |-----------------------------------|
-| + Game(x:Player, o:Player)        |
-| + play(): void                    |
-| - printBoard(): void              |
+| + Game(x:Player, o:Player,        |
+|        board:Board)               |
+| + run(): void                     |
 +-----------------------------------+
-| uses Board, has Players,          |
-| checks state via GameResolver     |
-+-----------------------------------+
+(uses Board; calls GameResolver; depends on Player)
+
 
 ```
 
