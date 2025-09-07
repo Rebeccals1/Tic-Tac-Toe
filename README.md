@@ -48,10 +48,13 @@ src/
    └─ Main.java            # wiring (creates players, starts Game)
 ```
 
-## Design Snapshot (beginner-friendly)
-- **Encapsulation:** The board’s 3×3 grid is private inside Board. Moves are only applied through placeMove(), which checks for valid range, emptiness, and correct mark.
-- **Inheritance/Polymorphism:** Player is abstract and defines the shared API (nextMove(Board), mark()). HumanPlayer and ComputerPlayer implement it differently, but Game treats them the same.
-- **Trade-off:** Inheritance makes the design simple for now. If more AI types are added later, the design could switch to strategies (composition) for more flexibility.
+## Design Snapshot
+**For encapsulation**, I made the board’s cells private so nothing outside can change them directly. You have to use methods like placeMove(position, mark) to make a move. Those methods check the input first: the position must be 1–9 and the spot can’t already be taken. My basic “always true” rules (invariants) are: the board always has 9 spots, and each spot is either X, O, or empty. I never return the real array to the outside—if something needs to read it, it goes through a getter.
+
+**For inheritance and polymorphism**, I created a Player base class (or interface) with a nextMove(Board) method. Then I made HumanPlayer and ComputerPlayer that both fill in that method differently. The game loop only talks to Player, so it doesn’t care which kind it is. I put win checking in a separate helper (GameResolver) so it’s not mixed with input or printing.
+
+**A trade-off I made:** I used inheritance for players instead of composition (like Player having a Strategy). Inheritance was simpler for now and easier for me to wire up, but if I later want to switch strategies at runtime, composition would be more flexible.
+
 
 
 ## UML / Diagram (ASCII)
